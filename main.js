@@ -9,7 +9,12 @@ const server = app.listen(3000, function () {
 });
 
 app.post("/", (req, res) => {
-    res.send(req.body[req.query.o] + "")
+    if(!req.query.o) {
+        res.send(j2e(req.body)
+    }
+    else {
+        res.send(req.body[req.query.o] + "")
+    }
 })
 
 app.get("/", (req, res) => {
