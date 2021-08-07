@@ -10,7 +10,7 @@ const server = app.listen(3000, function () {
 
 app.post("/", (req, res) => {
     if(!req.query.o) {
-        res.send(j2e(req.body)
+        res.send(j2e(req.body))
     }
     else {
         res.send(req.body[req.query.o] + "")
