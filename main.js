@@ -22,7 +22,7 @@ app.post("/", (req, res) => {
 app.get("/", (req, res) => {
     if (!req.query.url || req.query.token !== process.env.token) {
         error("GET ERR")
-        res.send("error")
+        res.send("see https://airy-bicycle-aa8.notion.site/JSON-emap-parse-45688feb99ce43f19688ccbd2c53319d")
     } else {
         error("GET")
         axios.get(req.query.url).then(function (response) {
