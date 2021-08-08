@@ -4,6 +4,14 @@ const axios = require("axios");
 const app = express()
 app.use(express.json())
 
+app.use(function (error, req, res, next) {
+    if (error instanceof SyntaxError) {
+      res.status(400).send("error");
+    } else {
+      next();
+    }
+  });
+
 const server = app.listen(3000, function () {
     console.log("ok port:" + server.address().port)
 });
@@ -16,7 +24,7 @@ app.post("/", (req, res) => {
     else {
         info("POST j2o")
         try {
-            const option = req.query.o
+            const option = (req.query.o).replace(/\[/g, '.').replace(/\]/g, '')
             const options = option.split(".")
             const result = options.reduce((obj, key) => { return obj[key]}, req.body)
             if(!result || typeof result === "object") {
