@@ -18,8 +18,7 @@ app.post("/", (req, res) => {
 })
 
 app.get("/", (req, res) => {
-    console.log(req.query.url);
-    if (!req.query.url) {
+    if (!req.query.url || !req.query.token !== process.env.token) {
         res.send("error")
     } else {
         axios.get(req.query.url).then(function (response) {
