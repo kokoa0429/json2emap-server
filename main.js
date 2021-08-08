@@ -20,7 +20,7 @@ app.post("/", (req, res) => {
 })
 
 app.get("/", (req, res) => {
-    if (!req.query.url || !req.query.token !== process.env.token) {
+    if (!req.query.url || req.query.token !== process.env.token) {
         error("GET ERR")
         res.send("error")
     } else {
