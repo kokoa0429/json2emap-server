@@ -15,7 +15,18 @@ app.post("/", (req, res) => {
     }
     else {
         info("POST j2o")
-        res.send(req.body[req.query.o] + "")
+        try {
+            const option = req.query.o
+            const options = option.split(".")
+            const result = options.reduce((obj, key) => { return obj[key]}, req.body)
+            if(!result || typeof result === "object") {
+                res.send(JSON.stringify(result))
+            } else {
+                res.send(result + "")
+            }
+        } catch (e) {
+            res.send("error")
+        }
     }
 })
 
